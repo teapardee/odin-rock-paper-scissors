@@ -21,6 +21,24 @@
           return "scissors";
       }
     }
+
+    function rockPaperScissors(playerSelection, computerSelection) {
+      if (playerSelection == computerSelection) {
+        console.log("Play Again!");
+      } else if (
+        (playerSelection === "rock" && computerSelection === "scissors") ||
+        (playerSelection === "scissors" && computerSelection === "paper") ||
+        (playerSelection === "paper" && computerSelection === "rock")
+      ) {
+        console.log(`You win! ${playerSelection} beats ${computerSelection}!`);
+      } else if (
+        (playerSelection === "scissors" && computerSelection === "rock") ||
+        (playerSelection === "paper" && computerSelection === "scissors") ||
+        (playerSelection === "rock" && computerSelection === "paper")
+      ) {
+        console.log(`You lose! ${computerSelection} beats ${playerSelection}!`);
+      }
+    }
   </script>
   <body></body>
 </html>
