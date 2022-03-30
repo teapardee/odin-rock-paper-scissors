@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    function computerPlay() {
+      let randomNum = Math.random();
+
+      switch (true) {
+        case randomNum <= 0.33:
+          return "rock";
+          break;
+        case randomNum >= 0.66:
+          return "paper";
+          break;
+        default:
+          return "scissors";
+      }
+    }
+  </script>
+  <body></body>
+</html>
