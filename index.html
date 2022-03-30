@@ -21,22 +21,47 @@
           return "scissors";
       }
     }
+    var computerScore = 0;
+    var playerScore = 0;
 
-    function rockPaperScissors(playerSelection, computerSelection) {
-      if (playerSelection == computerSelection) {
+    function playRound(playerSelection, computerSelection) {
+      if (playerSelection === computerSelection) {
         console.log("Play Again!");
+        return "neither";
       } else if (
         (playerSelection === "rock" && computerSelection === "scissors") ||
         (playerSelection === "scissors" && computerSelection === "paper") ||
         (playerSelection === "paper" && computerSelection === "rock")
       ) {
         console.log(`You win! ${playerSelection} beats ${computerSelection}!`);
+        return "player";
       } else if (
         (playerSelection === "scissors" && computerSelection === "rock") ||
         (playerSelection === "paper" && computerSelection === "scissors") ||
         (playerSelection === "rock" && computerSelection === "paper")
       ) {
         console.log(`You lose! ${computerSelection} beats ${playerSelection}!`);
+        return "computer";
+      }
+    }
+
+    function game() {
+      for (let i = 0; i < 5; i++) {
+        const playerSelection = prompt("Rock, Paper or Scissors?");
+        const computerSelection = computerPlay();
+        let gameOutcome = playRound(playerSelection, computerSelection);
+
+        if (gameOutcome === "player") {
+          var playerScore = playerScore++;
+        } else if (gameOutcome === "computer") {
+          var computerScore = computerScore++;
+        }
+      }
+
+      if (omputerScore > playerScore) {
+        console.log(`Computer Wins ${computerScore} : ${playerScore} !`);
+      } else {
+        console.log(`Player Wins ${playerScore} : ${computerScore} !`);
       }
     }
   </script>
