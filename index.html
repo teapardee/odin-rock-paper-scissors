@@ -6,64 +6,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <script>
-    function computerPlay() {
-      let randomNum = Math.random();
 
-      switch (true) {
-        case randomNum <= 0.33:
-          return "rock";
-          break;
-        case randomNum >= 0.66:
-          return "paper";
-          break;
-        default:
-          return "scissors";
-      }
-    }
-    var computerScore = 0;
-    var playerScore = 0;
+  <body>
+    <script>
+      /* Randomly select whether computer plays rock, paper or scissors */
 
-    function playRound(playerSelection, computerSelection) {
-      if (playerSelection === computerSelection) {
-        console.log("Play Again!");
-        return "neither";
-      } else if (
-        (playerSelection === "rock" && computerSelection === "scissors") ||
-        (playerSelection === "scissors" && computerSelection === "paper") ||
-        (playerSelection === "paper" && computerSelection === "rock")
-      ) {
-        console.log(`You win! ${playerSelection} beats ${computerSelection}!`);
-        return "player";
-      } else if (
-        (playerSelection === "scissors" && computerSelection === "rock") ||
-        (playerSelection === "paper" && computerSelection === "scissors") ||
-        (playerSelection === "rock" && computerSelection === "paper")
-      ) {
-        console.log(`You lose! ${computerSelection} beats ${playerSelection}!`);
-        return "computer";
-      }
-    }
+      function computerPlay() {
+        let randomNum = Math.random();
 
-    function game() {
-      for (let i = 0; i < 5; i++) {
-        const playerSelection = prompt("Rock, Paper or Scissors?");
-        const computerSelection = computerPlay();
-        let gameOutcome = playRound(playerSelection, computerSelection);
-
-        if (gameOutcome === "player") {
-          var playerScore = playerScore++;
-        } else if (gameOutcome === "computer") {
-          var computerScore = computerScore++;
+        switch (true) {
+          case randomNum <= 0.33:
+            return "rock";
+            break;
+          case randomNum >= 0.66:
+            return "paper";
+            break;
+          default:
+            return "scissors";
         }
       }
 
-      if (omputerScore > playerScore) {
-        console.log(`Computer Wins ${computerScore} : ${playerScore} !`);
-      } else {
-        console.log(`Player Wins ${playerScore} : ${computerScore} !`);
+      /* Play round of RPS and determine winner */
+
+      function playRound(playerSelection, computerSelection) {
+        if (playerSelection === computerSelection) {
+          console.log("Play Again!");
+          return "neither";
+        } else if (
+          (playerSelection === "rock" && computerSelection === "scissors") ||
+          (playerSelection === "scissors" && computerSelection === "paper") ||
+          (playerSelection === "paper" && computerSelection === "rock")
+        ) {
+          console.log(
+            `You win! ${playerSelection} beats ${computerSelection}!`
+          );
+          return "player";
+        } else if (
+          (playerSelection === "scissors" && computerSelection === "rock") ||
+          (playerSelection === "paper" && computerSelection === "scissors") ||
+          (playerSelection === "rock" && computerSelection === "paper")
+        ) {
+          console.log(
+            `You lose! ${computerSelection} beats ${playerSelection}!`
+          );
+          return "computer";
+        }
       }
-    }
-  </script>
-  <body></body>
+
+      /* Declare global variables for keeping score (revisit? look into a way to accomplish this without global variables?) */
+
+      let computerScore = 0;
+      let playerScore = 0;
+
+      /* Count score and display record at the end of the game */
+
+      function scoreCounter(gameOutcome) {
+        if (gameOutcome === "player") {
+          let playerScore = playerScore++;
+        } else if (gameOutcome === "computer") {
+          let computerScore = computerScore++;
+        }
+        return;
+      }
+
+      function displayRecord(record) {
+        if (computerScore > playerScore) {
+          console.log(`Computer Wins ${computerScore} : ${playerScore} !`);
+        } else {
+          console.log(`Player Wins ${playerScore} : ${computerScore} !`);
+        }
+      }
+
+      /* Play RPS with computer 5 times */
+
+      function game() {
+        for (let i = 0; i < 5; i++) {
+          const playerSelection = prompt("Rock, Paper or Scissors?");
+          const computerSelection = computerPlay();
+          let gameOutcome = playRound(playerSelection, computerSelection);
+          let record = scoreCounter(gameOutcome);
+          console.log(record);
+        }
+      }
+    </script>
+  </body>
 </html>
