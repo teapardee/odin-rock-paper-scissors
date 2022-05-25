@@ -1,3 +1,13 @@
+/* Event Listeners */
+
+const actions = document.querySelectorAll(".action");
+
+actions.forEach((action) => {
+  action.addEventListener("click", () => {
+    game(action.id);
+  });
+});
+
 /* Randomly select whether computer plays rock, paper or scissors */
 
 function computerPlay() {
@@ -54,6 +64,10 @@ function scoreCounter(gameOutcome) {
 }
 
 function displayRecord() {
+  const score = document.querySelector(".score");
+
+  score.textContent = `${window.playerScore} : ${window.computerScore}`;
+
   if (window.computerScore > window.playerScore) {
     return `Computer Wins ${window.computerScore} : ${window.playerScore} !`;
   } else {
@@ -63,12 +77,11 @@ function displayRecord() {
 
 /* Play RPS with computer 5 times */
 
-function game() {
-  for (let i = 0; i < 5; i++) {
-    const playerSelection = prompt("Rock, Paper or Scissors?").toLowerCase();
-    const computerSelection = computerPlay();
-    let gameOutcome = playRound(playerSelection, computerSelection);
-    let record = scoreCounter(gameOutcome);
-  }
+function game(userInput) {
+  const playerSelection = userInput;
+  const computerSelection = computerPlay();
+  let gameOutcome = playRound(playerSelection, computerSelection);
+  let record = scoreCounter(gameOutcome);
+
   console.log(displayRecord());
 }
